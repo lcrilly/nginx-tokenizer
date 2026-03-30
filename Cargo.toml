@@ -1,0 +1,29 @@
+[package]
+name = "nginx-tokenizer"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "NGINX module that counts LLM tokens in HTTP request and response bodies using OpenAI tiktoken"
+publish = false
+rust-version = "1.81.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+libc = "0.2"
+nginx-sys = "0.5.0"
+ngx = { version = "0.5.0", features = ["std"] }
+tiktoken-rs = "0.6"
+
+[features]
+default = ["export-modules"]
+# Generate `ngx_modules` table with module exports.
+# The exports table is required for building loadable modules with --crate-type cdylib
+# outside of the NGINX buildsystem. However, cargo currently does not detect
+# this configuration automatically.
+export-modules = []
+
+[profile.release]
+codegen-units = 1
+lto = true
