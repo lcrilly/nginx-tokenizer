@@ -23,7 +23,7 @@ WORKDIR /tmp/nginx-tokenizer
 RUN NGINX_SOURCE_DIR=/tmp/nginx cargo build --release && \
     strip target/release/libnginx_tokenizer.so -o /tmp/ngx_http_tokenizer_module.so
 
-# Create final image with nginx-wasm module loaded
+# Create final image with the tokenizer module loaded
 #
 FROM nginx:latest
 COPY --from=builder /tmp/ngx_http_tokenizer_module.so /etc/nginx/modules

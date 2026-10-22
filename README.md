@@ -259,6 +259,15 @@ nginx-tokenizer/
 
 ---
 
+## AI prompt
+
+This project was created with Perplexity Computer using Claude Sonnet 5.5 with the following prompt:
+
+> Create an nginx module in rust using the ngx-rust bindings. Its job is to count how many LLM tokens appear in the request and response of each HTTP request. The module should be enabled a single directive (llm_tokenize) which defaults to off. The value on enables counting for both requests and responses. The values request and response enable counting for just that direction, respectively. The count values are to be exposed as builtin variables $llm_tokens (for the request) and $llm_tokens_sent (for the response). The module should use the OpenAI tiktoken library (which has a Rust implementation). When enabled, the module should run the tokenizer as the data is streamed between client and the proxied server without buffering. Please create the module as a complete project following the same style as [https://github.com/nginx/nginx-acme](https://github.com/nginx/nginx-acme)
+> Make it configurable so that the specific model used for tokenizing can be provided as a `model=` parameter to the configuration directive. For example llm_tokenize on model=gpt-4o;
+
+---
+
 ## License
 
 Copyright 2025.  Licensed under the [Apache License, Version 2.0](LICENSE).
